@@ -1,6 +1,6 @@
 <?php
 include 'core/init.php';
-    
+logged_in_redirect();  //restricting logged in users to access this page.    
 if(empty($_POST)===FALSE){
     $username= $_POST['username'];
     $password = $_POST['password'];

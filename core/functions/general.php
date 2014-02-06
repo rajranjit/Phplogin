@@ -1,5 +1,35 @@
 <?php
     /*
+     * input@ none
+     * @return: none
+     * This function redirects logged in user to index.php
+     */
+    function logged_in_redirect(){
+        if(logged_in() === true){
+            redirect('index.php');
+            exit();
+        }
+    }
+
+    /*
+     * input@ none
+     * @return: none
+     * this function redirects non logged in users to the generic message page (protected.php)
+     */
+    function protect_page(){
+        if(logged_in() === false){
+            redirect('protected.php');
+            exit();
+        }
+    }
+    /*
+     * input@ data but no the value but the reference
+     * @return: returns the sanitized data
+     */
+    function array_sanitize(&$item){
+        $item = mysql_real_escape_string($item);
+    }
+    /*
      * input@ input variable from the user
      * @ return: mysql escaped variable
      */

@@ -1,5 +1,18 @@
 <?php
 /*
+ * input@ associative array passed from registraion page.
+ * @return: it inserts the data passed in the registraion form into the database lr.users
+ */
+function register_user($register_data){
+    array_walk($register_data, 'array_sanitize');
+    $register_data['password'] = md5($register_data['password']);
+    
+    $fields = '`' . implode('`, `', array_keys($register_data)) . '`';
+    $data = '\'' . implode('\', \'', $register_data) . '\'';
+ 
+    mysql_query("INSERT INTO `users` ($fields) VALUES ($data)");
+}
+/*
  * input@ none
  * @return : total number of active users in the the table 'lr.users'.
  */
@@ -47,6 +60,15 @@ function logged_in(){
     return (isset($_SESSION['user_id'])) ? true : false;
 }
 
+/*
+ * input email
+ * @return: true if the email exists in the databse else false
+ */
+ function email_exists($email){
+    $email = sanitize($email);
+    $query = mysql_query("SELECT COUNT(`user_id`) FROM `users` WHERE `email` = '$email'");
+    return (mysql_result($query, 0)==1) ? true : false;
+ }
 
 /*
  * input username
