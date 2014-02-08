@@ -8,6 +8,9 @@
             <li>
                 <a href ="changepassword.php">Change Password</a>
             </li>
+            <li>
+                <a href ="setting.php">Setting</a>
+            </li>
         </ul>
     </div>
 </div>

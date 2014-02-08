@@ -1,7 +1,8 @@
 <?php
+ob_start();
 session_start();
 ini_set('display_errors', 'on');
-error_reporting(E_ALL|E_STRICT);
+//error_reporting(E_ALL|E_STRICT);
 
 require 'database/connect.php';
 require 'functions/general.php';
@@ -18,7 +19,7 @@ require 'functions/users.php';
  */
 if(logged_in() === TRUE){  
     $session_user_id = $_SESSION['user_id'];
-    $user_data = user_data($session_user_id, 'user_id', 'username', 'password', 'first_name', 'last_name', 'email');
+    $user_data = user_data($session_user_id, 'user_id', 'username', 'password', 'first_name', 'last_name', 'email', 'email_code');
     /*
      * the if clause below checks if the user is active or not. if the user is not active by any reason 
      * this logic will log the user out and will restrict the user from browsing the user web pages.

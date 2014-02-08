@@ -5,8 +5,7 @@ include 'includes/overall/header.php';
 
 <h1>Home</h1>
 <p>Just a template.</p>
+<p>Starting </p>
 
-<?php
 
-?>
 <?php include 'includes/overall/footer.php'; ?>

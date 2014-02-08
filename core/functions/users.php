@@ -1,4 +1,28 @@
 <?php
+    /*
+     * input@ email address and the email activation(email_code) code
+     * @return: true if the email and email activation (email_code) code and active state = 0 all matches in the database.
+     *          else false 
+     */
+    function activate($email, $email_code){
+        $email = mysql_real_escape_string($email);
+        $email_code = mysql_real_escape_string($email_code);
+        if(mysql_result(mysql_query("SELECT COUNT(`user_id`) FROM `users` WHERE `email` = '$email' AND `email_code` = '$email_code' AND `active` = 0"), 0) == 1){
+            mysql_query("UPDATE `users` SET `active` = 1 WHERE `email` = '$email'");
+            return true;
+        } else{
+            return false;
+        }     
+    }
+    /*
+     * input@ user_id and new password
+     * @return: none, it makes a mysql query to update the passsword field.
+     */
+function change_password($user_id, $password){
+    $user_id = (int)$user_id;
+    $password = md5($password);
+    mysql_query("UPDATE `users` SET `password` = '$password' WHERE `user_id` = $user_id");
+}
 /*
  * input@ associative array passed from registraion page.
  * @return: it inserts the data passed in the registraion form into the database lr.users
@@ -11,6 +35,10 @@ function register_user($register_data){
     $data = '\'' . implode('\', \'', $register_data) . '\'';
  
     mysql_query("INSERT INTO `users` ($fields) VALUES ($data)");
+    mail($register_data['email'], 'Activate your account', "Hello " . $register_data['first_name'] . ","
+            . "\n\nYou need to activate your account, so use the link below:"
+            . "\n\nhttp://localhost/Phplogin/activate.php?"
+            . "email=" . $register_data['email'] . "&email_code=" . $register_data['email_code'] . "\n\n-raj@ranjit");
 }
 /*
  * input@ none

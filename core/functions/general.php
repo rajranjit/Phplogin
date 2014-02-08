@@ -1,5 +1,13 @@
 <?php
     /*
+     * input@ receivers email address, subject of the email, and the message of the email/body of the email
+     * @return: none, it send the email to $to receiver.
+     */
+
+    function email($to, $subject, $message){
+        mail($to, $subject, $message, "From: raj@tutorialmail.com");
+    }
+    /*
      * input@ none
      * @return: none
      * This function redirects logged in user to index.php
