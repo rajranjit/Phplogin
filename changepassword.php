@@ -27,9 +27,12 @@ include 'includes/overall/header.php';
 
 <h1>Change Password</h1>
 <?php
-if(isset($_GET['success']) && empty($_GET['success']) === true){
-    echo 'You password has been changed.';
+if(isset($_GET['success']) === true && empty($_GET['success']) === true){
+    echo 'Your password has been changed.';
 } else {
+    if(isset($_GET['force']) === true && empty($_GET['force']) === true){
+        echo "<p>You must change your password before you go the other pages.</p>"; 
+    }
 
     if(empty($_POST) === false && empty($errors) === true){
         //change password
@@ -66,4 +69,4 @@ if(isset($_GET['success']) && empty($_GET['success']) === true){
 <?php 
 }
 include 'includes/overall/footer.php'; 
-?>
+

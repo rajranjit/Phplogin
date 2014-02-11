@@ -8,6 +8,8 @@ require 'database/connect.php';
 require 'functions/general.php';
 require 'functions/users.php';
 
+$current_file = explode('/', $_SERVER['SCRIPT_NAME']);
+$current_file = end($current_file);
 /*
  * Explanation of the code below.
  * This logged_in() function checks if the session is set or not. 
@@ -19,7 +21,7 @@ require 'functions/users.php';
  */
 if(logged_in() === TRUE){  
     $session_user_id = $_SESSION['user_id'];
-    $user_data = user_data($session_user_id, 'user_id', 'username', 'password', 'first_name', 'last_name', 'email', 'email_code');
+    $user_data = user_data($session_user_id, 'user_id', 'username', 'password', 'first_name', 'last_name', 'email', 'password_recover', 'type');
     /*
      * the if clause below checks if the user is active or not. if the user is not active by any reason 
      * this logic will log the user out and will restrict the user from browsing the user web pages.
@@ -27,6 +29,10 @@ if(logged_in() === TRUE){
     if(user_active($user_data['username']) === false){
         session_destroy();
         redirect('index.php');
+        exit();
+    }
+    if($current_file !== 'changepassword.php' && $user_data['password_recover'] == 1){
+        header('Location: changepassword.php?force');
         exit();
     }
     

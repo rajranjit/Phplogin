@@ -1,0 +1,4 @@
+Rewriteengine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /Phplogin/profile.php?username=$1

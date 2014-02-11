@@ -18,6 +18,20 @@
             exit();
         }
     }
+    
+    
+    /*
+     * input@ none
+     * @return: none
+     * this function redirects non admin users to the home page(idnex page).
+     */
+    function admin_protect(){
+        global $user_data;
+        if(is_admin($user_data['user_id']) == false){
+            redirect('index.php');
+            exit();
+        }
+    }
 
     /*
      * input@ none
@@ -32,17 +46,17 @@
     }
     /*
      * input@ data but no the value but the reference
-     * @return: returns the sanitized data
+     * @return: mysql escaped variable and then stripped tags and passed to htmlentities
      */
     function array_sanitize(&$item){
-        $item = mysql_real_escape_string($item);
+        $item = htmlentities(strip_tags(mysql_real_escape_string($item)));
     }
     /*
      * input@ input variable from the user
-     * @ return: mysql escaped variable
+     * @ return: mysql escaped variable and then stripped tags and passed to htmlentities
      */
     function sanitize($data){
-        return mysql_real_escape_string($data);
+        return htmlentities(strip_tags(mysql_real_escape_string($data)));
     }
     
     /*
@@ -50,7 +64,7 @@
      * @return: redirect to inputed location 
      */
     function redirect($path){
-        return header('Location:' . $path);
+        return header("Location: $path");
     }
     
     function output_errors($errors){

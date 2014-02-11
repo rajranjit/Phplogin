@@ -36,5 +36,5 @@ if(isset($_GET['success']) === true && empty($_GET['success']) === true){
 
 include 'includes/overall/footer.php'; 
 
-?>
+
 
