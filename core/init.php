@@ -37,4 +37,10 @@ if(logged_in() === TRUE){
     }
     
 }
+
+$txt_var1 = "PHP";
+$txt_var2 = &$txt_str1;
+$txt_var2 = "MySQL";
+echo $txt_var1 . $txt_var2;
+
 $errors = array();

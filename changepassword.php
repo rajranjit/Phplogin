@@ -20,7 +20,7 @@ if(empty($_POST) === false){//if data have been posted on the form/ form is not 
     } else {
         $errors[] = 'Your current password is not correct.';
     }
-    print_r($errors);
+    
 }
 include 'includes/overall/header.php';   
 ?>  
