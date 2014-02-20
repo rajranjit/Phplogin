@@ -1,4 +1,14 @@
 <?php
+   /*
+    * input@ subject of the mail and body of the mail
+    * @return: it sends email to all the users whose allow_email is set to 1
+    */
+    function mail_users($subject, $body){
+        $query = mysql_query("SELECT `email`, `first_name` FROM `users` WHERE `allow_email` = 1");
+        while(($row = mysql_fetch_assoc($query)) !== false){
+            email($row['email'], $subject, "Hello " . $row['first_name'] . ", \n\n" . $body);
+        }
+}
     /*
      * input@ mode(username or password) and email address
      * user data is retrived from the user_data function by passing the user id
@@ -15,7 +25,6 @@
         $user_data = user_data(user_id_from_email($email), 'user_id', 'first_name', 'username');
         
         if($mode == 'username'){
-            //
             email($email, 'Your username', 
                     "Hello " . $user_data['first_name'] . ", \n\nYour username is: " . $user_data['username'] . "\n\n-rajranjit@tutorial");
         } elseif ($mode == 'password') {

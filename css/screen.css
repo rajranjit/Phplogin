@@ -29,6 +29,10 @@ ul li {
 ul li input[type="text"], ul li input[type="password"] {
     width:200px;
 }
+textArea{
+    width: 400px;
+    height: 150px;
+}
 /* Headers */
 h1 {
     font-size:1.8em;

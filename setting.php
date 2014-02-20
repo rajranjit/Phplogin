@@ -28,10 +28,12 @@ if(isset($_GET['success']) === true && empty($errors) === true){
 } else{
     
     if(empty($_POST) === false && empty($errors) === true){
+        $allow_email =($_POST['allow_email']=='on') ? 1 : 0;//Since we are strring allow_email value 1, but checked or unchecked from form gives us 'on' if checked
         $update_data = array(
             'first_name'    => $_POST['first_name'],
             'last_name'     => $_POST['last_name'],
             'email'         => $_POST['email'],
+            'allow_email'   => $allow_email
         );
         update_user($session_user_id, $update_data);
         header('Location: setting.php?success');
@@ -57,6 +59,9 @@ if(isset($_GET['success']) === true && empty($errors) === true){
             <li>
                 Email *:<br>
                 <input type="text" name="email" value="<?php echo $user_data['email'];?>">
+            </li>
+            <li>
+                <input type="checkbox" name="allow_email" <?php if($user_data['allow_email']==1){echo 'checked ="checked"';} ?>>Would you like to receive email from us?
             </li>
             <li>
                 <input type="submit" vlaue = "Update">

@@ -8,7 +8,8 @@ include 'includes/overall/header.php';
 <p>Finished 39</p>
 <?php
 if(is_admin($session_user_id)){
-    echo "You are admin!";
+    echo "You are admin!<br>";
+    echo '<a href="mail.php">Email all users.</a>';
 }
 ?>
 

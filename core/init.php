@@ -21,7 +21,7 @@ $current_file = end($current_file);
  */
 if(logged_in() === TRUE){  
     $session_user_id = $_SESSION['user_id'];
-    $user_data = user_data($session_user_id, 'user_id', 'username', 'password', 'first_name', 'last_name', 'email', 'password_recover', 'type');
+    $user_data = user_data($session_user_id, 'user_id', 'username', 'password', 'first_name', 'last_name', 'email', 'password_recover', 'type', 'allow_email');
     /*
      * the if clause below checks if the user is active or not. if the user is not active by any reason 
      * this logic will log the user out and will restrict the user from browsing the user web pages.
@@ -38,9 +38,4 @@ if(logged_in() === TRUE){
     
 }
 
-$txt_var1 = "PHP";
-$txt_var2 = &$txt_str1;
-$txt_var2 = "MySQL";
-echo $txt_var1 . $txt_var2;
-
-$errors = array();
+$errors = array();?>
